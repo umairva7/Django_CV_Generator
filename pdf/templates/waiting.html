@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generating CV...</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .loader {
+            border: 16px solid #f3f3f3;
+            border-top: 16px solid #3498db;
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            animation: spin 2s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .message {
+            margin-top: 30px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-6 text-center">
+                <div class="loader"></div>
+                <div class="message">
+                    <h3>Please wait while we generate your CV...</h3>
+                    <p>This may take a few seconds.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Redirect to resume page after a few seconds -->
+    <script>
+    setTimeout(function() {
+        window.location.href = "/list/";
+    }, 3000); // Redirects after 3 seconds
+    </script>
+
+</body>
+</html>

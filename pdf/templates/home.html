@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - CV Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        h1 {
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .container p {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            margin: 10px;
+            padding: 12px 25px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+
+        .btn.logout {
+            background-color: #f44336;
+        }
+
+        .btn.logout:hover {
+            background-color: #d32f2f;
+        }
+
+        .btn.login {
+            background-color: #007BFF;
+        }
+
+        .btn.login:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to CV Generator</h1>
+
+        {% if user.is_authenticated %}
+            <p>Welcome back, {{ user.username }}!</p>
+            <a href="{% url 'list' %}" class="btn">View All Resumes</a>
+            <a href="{% url 'logout' %}" class="btn logout">Logout</a>
+        {% else %}
+            <a href="{% url 'login' %}" class="btn login">Login</a>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Form</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .step { display: none; }
+        .step.active { display: block; }
+        .form-control {
+            margin-bottom: 15px;
+        }
+        .add-button {
+            margin-top: 10px;
+        }
+        .remove-button {
+            color: red;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Create Your Resume</h2>
+    <form action="{% url 'submit' %}" method="POST">
+        {% csrf_token %}
+        <!-- Step 1: Personal Information -->
+        <div class="step active" id="step1">
+            <h4>Personal Information</h4>
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="number">Phone Number</label>
+                <input type="text" class="form-control" id="number" name="number" required>
+            </div>
+            <div class="form-group">
+                <label for="summary">Summary</label>
+                <textarea class="form-control" id="summary" name="summary" rows="3" maxlength="500" required></textarea>
+            </div>
+            <button type="button" class="btn btn-primary" onclick="nextStep()">Next</button>
+        </div>
+
+        <!-- Step 2: Education Details -->
+        <div class="step" id="step2">
+            <h4>Education Details</h4>
+            <div id="education-container">
+                <div class="education-item">
+                    <div class="form-group">
+                        <label for="degree">Degree</label>
+                        <input type="text" class="form-control" name="degree" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="school">School</label>
+                        <input type="text" class="form-control" name="school" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="college">College</label>
+                        <input type="text" class="form-control" name="college" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="university">University</label>
+                        <input type="text" class="form-control" name="university" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="year_of_completion">Year of Completion</label>
+                        <input type="number" class="form-control" name="year_of_completion" min="1900" max="2100" required>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="btn btn-secondary" onclick="prevStep()">Previous</button>
+            <button type="button" class="btn btn-primary" onclick="nextStep()">Next</button>
+        </div>
+
+        <!-- Step 3: Work Experience -->
+        <div class="step" id="step3">
+            <h4>Work Experience</h4>
+            <div class="form-group">
+                <label for="experience">Experience</label>
+                <textarea class="form-control" id="experience" name="experience" rows="3" maxlength="500" required></textarea>
+            </div>
+            <button type="button" class="btn btn-secondary" onclick="prevStep()">Previous</button>
+            <button type="button" class="btn btn-primary" onclick="nextStep()">Next</button>
+        </div>
+
+        <!-- Step 4: Skills -->
+        <div class="step" id="step4">
+            <h4>Skills</h4>
+            <div class="form-group">
+                <label for="skills">Skills</label>
+                <textarea class="form-control" id="skills" name="skills" rows="3" maxlength="1000" required></textarea>
+            </div>
+            <button type="button" class="btn btn-secondary" onclick="prevStep()">Previous</button>
+            <button type="submit" class="btn btn-success">Submit Profile</button>
+        </div>
+    </form>
+</div>
+
+<!-- JavaScript for handling steps and adding/removing education entries -->
+<script>
+    let currentStep = 0;
+    const steps = document.querySelectorAll(".step");
+
+    function showStep(stepIndex) {
+        steps.forEach((step, index) => {
+            step.classList.toggle("active", index === stepIndex);
+        });
+    }
+
+    function nextStep() {
+        if (currentStep < steps.length - 1) {
+            currentStep++;
+            showStep(currentStep);
+        }
+    }
+
+    function prevStep() {
+        if (currentStep > 0) {
+            currentStep--;
+            showStep(currentStep);
+        }
+    }
+
+
+    showStep(currentStep);
+</script>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
